@@ -5,7 +5,7 @@
 - *Uppgift*:
 [2-1-individuellt_arbete.pdf](https://github.com/1dv409/kursmaterial/raw/master/Laborationsuppgifter/2-1-individuellt-arbete.pdf)
 
-- ***2014-12-09 12:00** : OBS! Detta gäller bara om du väljer att inte göra den föreslagna väderapplikationen. Senaste tidpunkten för inlämning av kort beskrivning av det individuella arbetet.*
+- * **2014-12-09 12:00** : OBS! Detta gäller bara om du väljer att inte göra den föreslagna väderapplikationen. Senaste tidpunkten för inlämning av kort beskrivning av det individuella arbetet.*
 
 - **2015-01-13 12:00** : Senaste tidpunkten för publicering på kursens webbhotell av den webbapplikation du muntligen redovisar under torsdagen den 15 januari 2015 eller fredagen den 16 januari 2015.
  
