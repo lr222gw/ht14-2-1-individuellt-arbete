@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Weather.Domain;
+using Weather.Domain.Webservices;
 
 namespace Weather.MVC.Controllers
 {
@@ -10,6 +12,8 @@ namespace Weather.MVC.Controllers
     {
         public ActionResult Index()
         {
+            GeonamesWebservice yo = new GeonamesWebservice();
+            yo.preGeonamesSearch("mjölby");
             return View();
         }
 
