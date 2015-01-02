@@ -12,8 +12,8 @@ namespace Weather.MVC.Controllers
     {
         public ActionResult Index()
         {
-            GeonamesWebservice yo = new GeonamesWebservice();
-            yo.preGeonamesSearch("mjölby");
+            YrWebservice yo = new YrWebservice();
+            yo.preGetForecastFromLaNLo("58.34576", "15.13853");
             return View();
         }
 

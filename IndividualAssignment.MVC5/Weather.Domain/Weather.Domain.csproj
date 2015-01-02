@@ -42,6 +42,8 @@
     <Compile Include="GeonameLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Webservices\GeonamesWebservice.cs" />
+    <Compile Include="Webservices\YrWebservice.cs" />
+    <Compile Include="YrForecast.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataModels\" />

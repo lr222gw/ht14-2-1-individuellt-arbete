@@ -48,7 +48,7 @@ namespace Weather.Domain.Webservices
         }
 
         public IEnumerable<GeonameLocation> preGeonamesSearch(string searchString)
-        {
+        { // Här ska cachening göras...
 
 
             return searchGeonames(searchString);
