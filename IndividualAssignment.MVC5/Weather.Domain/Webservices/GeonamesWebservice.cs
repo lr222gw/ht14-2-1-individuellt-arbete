@@ -12,7 +12,7 @@ namespace Weather.Domain.Webservices
 {
     public class GeonamesWebservice
     {
-        private IEnumerable<GeonameLocation> searchGeonames(string searchString){            
+        private IEnumerable<Location> searchGeonames(string searchString){            
 
             string requestUriString = String.Format("http://api.geonames.org/search?name=" + searchString + "&username=" + "grayfish" );
             //TODO: Användarnamnet SKA ligga i Web.configen! (Finns där under namnet geonamesUser, 
@@ -26,13 +26,13 @@ namespace Weather.Domain.Webservices
                 content.Load(response.GetResponseStream()); // Läser in XML filen i mitt XML-dokument, då kan jag använda content-variabeln för att läsa av innehållet
             }
 
-            List<GeonameLocation> listToReturn = new List<GeonameLocation>();
+            List<Location> listToReturn = new List<Location>();
 
             var locations = content.GetElementsByTagName("geoname"); //Här gör jag en array av alla "geoname"'s i xmlfilen. Alltså alla locations... 
 
             foreach (System.Xml.XmlElement obj in locations)
             {
-                GeonameLocation location = new GeonameLocation(
+                Location location = new Location(
                     obj["name"].InnerText,
                     obj["lng"].InnerText,
                     obj["lat"].InnerText,
@@ -43,11 +43,11 @@ namespace Weather.Domain.Webservices
                 listToReturn.Add(location);
             }
 
-            return listToReturn.AsEnumerable<GeonameLocation>();
+            return listToReturn.AsEnumerable<Location>();
            
         }
 
-        public IEnumerable<GeonameLocation> preGeonamesSearch(string searchString)
+        public IEnumerable<Location> preGeonamesSearch(string searchString)
         { // Här ska cachening göras...
 
 

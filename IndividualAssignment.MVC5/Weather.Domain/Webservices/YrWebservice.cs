@@ -10,7 +10,7 @@ namespace Weather.Domain.Webservices
 {
     public class YrWebservice
     {
-        private IEnumerable<YrForecast> GetForecastFromLaNLo(string latitude, string longtitude)
+        private IEnumerable<Forecast> GetForecastFromLaNLo(string latitude, string longtitude)
         {
 
             string requestUriString = String.Format("http://api.yr.no/weatherapi/locationforecast/1.9/?lat="+latitude+";lon="+longtitude);
@@ -24,7 +24,7 @@ namespace Weather.Domain.Webservices
                 content.Load(response.GetResponseStream()); // Läser in XML filen i mitt XML-dokument, då kan jag använda content-variabeln för att läsa av innehållet
             }
 
-            List<YrForecast> listToReturn = new List<YrForecast>();
+            List<Forecast> listToReturn = new List<Forecast>();
 
             var Forecasts = content.GetElementsByTagName("time"); //Här gör jag en array av alla "time" ....
 
@@ -52,7 +52,7 @@ namespace Weather.Domain.Webservices
                 else { newDateFlag = false; }
 
                 
-                if (obj.GetAttribute("from") == obj.GetAttribute("to"))
+                if (obj.GetAttribute("from") == obj.GetAttribute("to") && temperature == "notSet")
                 {//Om både From och To är samma  
                     if (Convert.ToDateTime(obj.GetAttribute("from")).TimeOfDay == new TimeSpan(15, 0, 0))
                     {//och även klockan 15 på dagen så kan temperaturen hämtas ut
@@ -64,11 +64,11 @@ namespace Weather.Domain.Webservices
                     }
                     
                 }
-                if (Convert.ToDateTime(obj.GetAttribute("from")).TimeOfDay == new TimeSpan(12, 0, 0) && Convert.ToDateTime(obj.GetAttribute("to")).TimeOfDay == new TimeSpan(18, 0, 0))
+                if (Convert.ToDateTime(obj.GetAttribute("from")).TimeOfDay == new TimeSpan(12, 0, 0) && Convert.ToDateTime(obj.GetAttribute("to")).TimeOfDay == new TimeSpan(18, 0, 0) && pic == "notSet")
                 {//om from är 12.00 och to är 18.00 så kan bilden hämtas ut (Vilken bild som ska användas...)
                     pic = obj["location"]["symbol"].GetAttribute("id");
                 }
-                else if (obj.GetAttribute("from") != obj.GetAttribute("to") && (Convert.ToDateTime(obj.GetAttribute("to")).TimeOfDay < new TimeSpan(18, 0, 0) && Convert.ToDateTime(obj.GetAttribute("to")).TimeOfDay > new TimeSpan(12, 0, 0)))
+                else if (obj.GetAttribute("from") != obj.GetAttribute("to") && (Convert.ToDateTime(obj.GetAttribute("to")).TimeOfDay < new TimeSpan(24, 0, 0) && Convert.ToDateTime(obj.GetAttribute("to")).TimeOfDay > new TimeSpan(12, 0, 0)))
                 {// En backup om det inte hittas några på pricken... Denna tar fram tider mellan 12.00 och 18.00...
                     backupPic.Add(obj["location"]["symbol"].GetAttribute("id"));
                 }
@@ -86,7 +86,7 @@ namespace Weather.Domain.Webservices
                         {// om ingen bild fanns mellan 12.00 och 18.00 så ska föregående dags bild visas...
                             if (listToReturn.Count != 0)
                             {
-                                pic = listToReturn[listToReturn.Count - 1].Pic;
+                                pic = listToReturn[listToReturn.Count - 1].PictureName;
                             }
                             else
                             {
@@ -100,7 +100,7 @@ namespace Weather.Domain.Webservices
                         temperature = backupTemp[0];
                     }
 
-                    YrForecast Forecast = new YrForecast(
+                    Forecast Forecast = new Forecast(
                     Convert.ToDateTime(obj.GetAttribute("from")) - new TimeSpan(1, 0, 0, 0), //Eftersom detta görs vid ny dag så tar vi minus 1 dag...
                     temperature,
                     pic
@@ -125,11 +125,11 @@ namespace Weather.Domain.Webservices
                 
             }
 
-            return listToReturn.AsEnumerable<YrForecast>();
+            return listToReturn.AsEnumerable<Forecast>();
 
         }
 
-        public IEnumerable<YrForecast> preGetForecastFromLaNLo(string latitude, string longtitude)
+        public IEnumerable<Forecast> preGetForecastFromLaNLo(string latitude, string longtitude)
         { // Här ska cachening göras...
 
 

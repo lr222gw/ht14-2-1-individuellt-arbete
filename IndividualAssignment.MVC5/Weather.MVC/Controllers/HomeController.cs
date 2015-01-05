@@ -13,7 +13,7 @@ namespace Weather.MVC.Controllers
         public ActionResult Index()
         {
             YrWebservice yo = new YrWebservice();
-            yo.preGetForecastFromLaNLo("58.34576", "15.13853");
+            var h = yo.preGetForecastFromLaNLo("58.34576", "15.13853");
             return View();
         }
 
