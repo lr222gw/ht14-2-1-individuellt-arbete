@@ -27,5 +27,6 @@ namespace Weather.Domain
     
         public virtual DbSet<Forecast> Forecast { get; set; }
         public virtual DbSet<Location> Location { get; set; }
+        public virtual DbSet<prevSearchCache> prevSearchCache { get; set; }
     }
 }

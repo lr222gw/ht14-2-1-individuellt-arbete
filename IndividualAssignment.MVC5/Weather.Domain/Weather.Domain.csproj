@@ -69,16 +69,19 @@
     <Compile Include="DataModels\Location.cs">
       <DependentUpon>1dv409_lr222gw_Weather.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModels\prevSearchCache.cs">
+      <DependentUpon>1dv409_lr222gw_Weather.tt</DependentUpon>
+    </Compile>
     <Compile Include="GeonameLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\dbRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="superService.cs" />
     <Compile Include="Webservices\GeonamesWebservice.cs" />
     <Compile Include="Webservices\YrWebservice.cs" />
     <Compile Include="YrForecast.cs">
       <CustomToolNamespace>Weather.Domain</CustomToolNamespace>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

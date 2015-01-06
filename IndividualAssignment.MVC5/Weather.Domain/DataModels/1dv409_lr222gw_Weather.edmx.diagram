@@ -5,9 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="3773c77029eb42a89e3e304bcba9fab3" Name="Diagram1">
-        <EntityTypeShape EntityType="dv409_lr222gw_WeatherModel.Forecast" Width="1.5" PointX="6.625" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dv409_lr222gw_WeatherModel.Location" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dv409_lr222gw_WeatherModel.Forecast" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dv409_lr222gw_WeatherModel.Location" Width="1.5" PointX="1" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="dv409_lr222gw_WeatherModel.FK_Forecast_Location" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dv409_lr222gw_WeatherModel.prevSearchCache" Width="1.5" PointX="4.625" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

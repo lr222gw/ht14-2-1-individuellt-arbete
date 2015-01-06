@@ -12,7 +12,7 @@ namespace Weather.Domain.Webservices
 {
     public class GeonamesWebservice
     {
-        private IEnumerable<Location> searchGeonames(string searchString){            
+        public IEnumerable<Location> searchGeonames(string searchString){            
 
             string requestUriString = String.Format("http://api.geonames.org/search?name=" + searchString + "&username=" + "grayfish" );
             //TODO: Användarnamnet SKA ligga i Web.configen! (Finns där under namnet geonamesUser, 
@@ -36,7 +36,8 @@ namespace Weather.Domain.Webservices
                     obj["name"].InnerText,
                     obj["lng"].InnerText,
                     obj["lat"].InnerText,
-                    obj["countryName"].InnerText
+                    obj["countryName"].InnerText,
+                    int.Parse(obj["geonameId"].InnerText)
                     //"empty" //obs, måste ha läst fel, här skulle region vara, men det finns ingen region... typ östergötland
                     );
 
@@ -47,12 +48,12 @@ namespace Weather.Domain.Webservices
            
         }
 
-        public IEnumerable<Location> preGeonamesSearch(string searchString)
-        { // Här ska cachening göras...
+        //public ienumerable<location> pregeonamessearch(string searchstring)
+        //{ // här ska cachening göras...
 
 
-            return searchGeonames(searchString);
+        //    return searchgeonames(searchstring);
 
-        }
+        //}
     }
 }

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Weather.Domain.Location>
+
+@foreach (var item in Model)
+{
+    <div class="locationItem">
+        <h3>@Html.ActionLink(item.Name, "Forecast", new { geonameID = item.GeoLocationID })</h3>
+        <p>@Html.DisplayTextFor(model => item.Country)</p>
+        
+        
+    </div>
+}

@@ -20,12 +20,12 @@ namespace Weather.Domain
         }
     
         public int LocationID { get; set; }
-        public System.DateTime NextForecastUpdate { get; set; }
+        public Nullable<System.DateTime> NextForecastUpdate { get; set; }
         public string Name { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
         public string Country { get; set; }
-        public string Region { get; set; }
+        public int GeoLocationID { get; set; }
     
         public virtual ICollection<Forecast> Forecast { get; set; }
     }

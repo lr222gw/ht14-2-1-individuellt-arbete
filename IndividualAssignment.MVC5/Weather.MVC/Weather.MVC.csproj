@@ -118,7 +118,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -156,15 +155,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Locations\Create.cshtml" />
-    <Content Include="Views\Locations\Delete.cshtml" />
-    <Content Include="Views\Locations\Details.cshtml" />
-    <Content Include="Views\Locations\Edit.cshtml" />
-    <Content Include="Views\Locations\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\IndexTEMP.cshtml" />
+    <Content Include="Views\Home\IndexTEMPDetails.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Location_DPView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

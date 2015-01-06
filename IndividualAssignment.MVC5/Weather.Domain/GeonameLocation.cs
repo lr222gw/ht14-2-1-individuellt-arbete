@@ -10,11 +10,12 @@ namespace Weather.Domain
     [MetadataType(typeof(Location_Metadata))]
     public partial class Location
     {
-        public Location(string _name, string _Longitude, string _Latitude, string _Country){ //, string _Region
+        public Location(string _name, string _Longitude, string _Latitude, string _Country, int _GeoLocationID){ //, string _Region
             Name = _name;
             Longitude = _Longitude;
             Latitude = _Latitude;
             Country = _Country;
+            GeoLocationID = _GeoLocationID;
             //Region = _Region;
 
         }
@@ -25,6 +26,7 @@ namespace Weather.Domain
             public string Longitude { get; set; }
             public string Latitude { get; set; }
             public string Country { get; set; }
+            public int GeoLocationID { get; set; }
             //public string Region { get; set; }
         }
     }

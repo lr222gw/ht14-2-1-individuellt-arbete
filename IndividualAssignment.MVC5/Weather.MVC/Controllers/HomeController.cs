@@ -4,31 +4,39 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Weather.Domain;
+using Weather.Domain.Repositories;
 using Weather.Domain.Webservices;
 
 namespace Weather.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        SuperService service = new SuperService();
+        
         public ActionResult Index()
         {
-            YrWebservice yo = new YrWebservice();
-            var h = yo.preGetForecastFromLaNLo("58.34576", "15.13853");
+            //YrWebservice yo = new YrWebservice();
+            //var h = yo.preGetForecastFromLaNLo("58.34576", "15.13853");
             return View();
         }
 
-        public ActionResult About()
+        [HttpPost]
+        [ActionName("Index")]
+        public ActionResult Index_Post(string searchvalue)
         {
-            ViewBag.Message = "Your application description page.";
 
-            return View();
+            var h = service.search(searchvalue);
+            
+            return View(h);
         }
 
-        public ActionResult Contact()
+        public ActionResult Forecast(string geonameID)
         {
-            ViewBag.Message = "Your contact page.";
-
+            //YrWebservice yo = new YrWebservice();
+            //var h = yo.preGetForecastFromLaNLo("58.34576", "15.13853");
             return View();
         }
+
+
     }
 }
