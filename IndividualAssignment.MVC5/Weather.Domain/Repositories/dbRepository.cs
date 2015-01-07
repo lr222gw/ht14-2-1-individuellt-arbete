@@ -34,19 +34,28 @@ namespace Weather.Domain.Repositories
             //save();
         }
 
-        public void Updatelocation(Location location)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletelocation(Location location)
-        {
-            throw new NotImplementedException();
-        }
 
         public Location getlocationByGeoId(int id)
         {
-            throw new NotImplementedException();
+            var result = from Name
+                         in _context.Location
+                         where Name.GeoLocationID == id
+                         select Name;            
+            if (result.Any()) {
+
+                var he =  new Location()
+                {
+                    Country = result.First().Country,
+                    GeoLocationID = result.First().GeoLocationID,
+                    Latitude = result.First().Latitude,
+                    Longitude = result.First().Longitude,
+                    LocationID = result.First().LocationID,
+                    Name = result.First().Name,
+                    NextForecastUpdate = result.First().NextForecastUpdate
+                };
+                return he;
+            }
+            return null;
         }
         public IEnumerable<Location> getlocationByGeoName(string name)
         {
@@ -137,7 +146,7 @@ namespace Weather.Domain.Repositories
             {//om den inte hittas så är den ny och då ska data hämtas från geoNames...
 
                 //var he = DateTime.Today + new TimeSpan(5, 0, 0, 0);
-                _context.prevSearchCache.Add(new prevSearchCache() { SearchValue = searchToCheck.ToLower().Trim(), validDate = DateTime.Today + new TimeSpan(5, 0, 0, 0) });
+                _context.prevSearchCache.Add(new prevSearchCache() { SearchValue = searchToCheck.ToLower().Trim(), validDate = DateTime.Today + new TimeSpan(30, 0, 0, 0) });
                 return true;
             }
             else if (result.First().validDate < DateTime.Today)
@@ -146,7 +155,7 @@ namespace Weather.Domain.Repositories
                 var toChange = result.First();
                 _context.prevSearchCache.Remove(toChange);
                 save();
-                toChange.validDate = DateTime.Today + new TimeSpan(5, 0, 0, 0);
+                toChange.validDate = DateTime.Today + new TimeSpan(30, 0, 0, 0);
                 _context.prevSearchCache.Add(toChange);
                 return true;
             }
@@ -154,9 +163,77 @@ namespace Weather.Domain.Repositories
             return false;
         }
 
-        public void deleteSearch(string searchToDelete)
+        public bool RecentlyLocationForecast(Location locationToCheck)
         {
-            throw new NotImplementedException();
+            var resultDate = (from location
+                         in _context.Location
+                          where location.GeoLocationID == locationToCheck.GeoLocationID
+                          select location.NextForecastUpdate);
+
+            if(resultDate.Any()){
+                var date = resultDate.First().Value;
+                if(date < DateTime.Today){
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }            
+
+
         }
+
+        public void InsertForecast(Location locationToGiveForecast, IEnumerable<Forecast> yrList)
+        {
+            try
+            {//ta bort den gamla och lägg till den nya som innehåller forecasts...
+                var toRemove = from location
+                               in _context.Location
+                               where location.LocationID == locationToGiveForecast.LocationID
+                               select location;
+                _context.Location.Remove(toRemove.First());
+                save();
+                locationToGiveForecast.Forecast = yrList.ToArray();
+                _context.Location.Add(locationToGiveForecast);                
+                save();
+            }catch(Exception e){
+                var h = e; 
+            }
+            
+
+        }
+
+        public IEnumerable<Forecast> getCachedForecasts(Location locationToCheck)
+        {
+            var result = (from forecast
+                         in _context.Forecast
+                          where forecast.LocationID == locationToCheck.LocationID
+                          select forecast);
+
+            List<Forecast> forecastlist = new List<Forecast>();
+
+            if(result.Any()){
+
+                var res = result;
+                foreach (var forecast in res)
+                {
+                    forecastlist.Add(new Forecast(forecast.DateNTime, forecast.Temperature, forecast.PictureName)
+                    {                       
+                        ForecastID = forecast.ForecastID,
+                        Location = forecast.Location,
+                        LocationID = forecast.LocationID
+                    });
+                }
+            }
+            return forecastlist.AsEnumerable();
+
+        }
+
+
     }
 }

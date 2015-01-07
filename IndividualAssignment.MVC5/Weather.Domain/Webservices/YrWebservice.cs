@@ -66,11 +66,11 @@ namespace Weather.Domain.Webservices
                 }
                 if (Convert.ToDateTime(obj.GetAttribute("from")).TimeOfDay == new TimeSpan(12, 0, 0) && Convert.ToDateTime(obj.GetAttribute("to")).TimeOfDay == new TimeSpan(18, 0, 0) && pic == "notSet")
                 {//om from är 12.00 och to är 18.00 så kan bilden hämtas ut (Vilken bild som ska användas...)
-                    pic = obj["location"]["symbol"].GetAttribute("id");
+                    pic = obj["location"]["symbol"].GetAttribute("number");
                 }
                 else if (obj.GetAttribute("from") != obj.GetAttribute("to") && (Convert.ToDateTime(obj.GetAttribute("to")).TimeOfDay < new TimeSpan(24, 0, 0) && Convert.ToDateTime(obj.GetAttribute("to")).TimeOfDay > new TimeSpan(12, 0, 0)))
                 {// En backup om det inte hittas några på pricken... Denna tar fram tider mellan 12.00 och 18.00...
-                    backupPic.Add(obj["location"]["symbol"].GetAttribute("id"));
+                    backupPic.Add(obj["location"]["symbol"].GetAttribute("number"));
                 }
 
                 if (newDateFlag)
@@ -135,6 +135,14 @@ namespace Weather.Domain.Webservices
 
             return GetForecastFromLaNLo(latitude, longtitude);
 
+        }
+
+        internal Location getImageForLocationForecasts(Location theLocation)
+        {
+            foreach(var forecast in theLocation.Forecast){
+                forecast.imageUrl = "http://api.yr.no/weatherapi/weathericon/1.1/?symbol=" + forecast.PictureName + ";content_type=image/svg%2Bxml";
+            }
+            return theLocation;
         }
     }
 }

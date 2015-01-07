@@ -18,6 +18,7 @@ namespace Weather.Domain
             PictureName = _Pic;
         }
 
+        public  string imageUrl { get; set; }
         public class Forecast_Metadata
         {            
             public DateTime DateNTime { get; set; }

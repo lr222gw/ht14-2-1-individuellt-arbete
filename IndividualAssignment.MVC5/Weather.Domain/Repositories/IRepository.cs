@@ -11,12 +11,15 @@ namespace Weather.Domain.Repositories
         //List<Location> getAllLocations();
         void Insertlocation(Location location);
         void Insertlocations(IEnumerable<Location> location);
-        void Updatelocation(Location location);
-        void Deletelocation(Location location);
         Location getlocationByGeoId(int id);
         IEnumerable<Location> getlocationByGeoName(string name);
         bool RecentlySearched(string searchToCheck);
-        void deleteSearch(string searchToDelete);
         void save();
+
+        bool RecentlyLocationForecast(Location locationToCheck);
+
+        void InsertForecast(Location locationToGiveForecast, IEnumerable<Forecast> yrList);
+
+        IEnumerable<Forecast> getCachedForecasts(Location locationToCheck);
     }
 }

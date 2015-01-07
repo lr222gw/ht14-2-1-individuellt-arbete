@@ -1,0 +1,27 @@
+﻿@model Weather.Domain.Location
+
+@{
+    ViewBag.Title = "Forecast";
+}
+
+
+<div>
+    <hr />
+    @{
+        if(Model != null){
+            <h1>@Model.Name</h1>
+            <h3>@Model.Country</h3>
+            var cultureFix = new System.Globalization.CultureInfo("sv-SE");            
+            <div id="forecasts">
+                @foreach (var forecast in Model.Forecast)
+                {
+                <div class="forecast">
+                    <h4>@cultureFix.DateTimeFormat.GetDayName(forecast.DateNTime.DayOfWeek)</h4>
+                    <img src="@forecast.imageUrl">
+                    <h5>@forecast.Temperature grader</h5>
+                </div>
+                }  
+            </div>
+        }
+    }
+</div>

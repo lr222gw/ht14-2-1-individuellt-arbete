@@ -32,9 +32,13 @@ namespace Weather.MVC.Controllers
 
         public ActionResult Forecast(string geonameID)
         {
-            //YrWebservice yo = new YrWebservice();
-            //var h = yo.preGetForecastFromLaNLo("58.34576", "15.13853");
-            return View();
+            if (geonameID == null)
+            {
+                return View("Index");
+            }
+            var theLocation = service.getLocationFromGeoID(geonameID);
+            service.getImageForLocationForecasts(theLocation);
+            return View(theLocation);
         }
 
 

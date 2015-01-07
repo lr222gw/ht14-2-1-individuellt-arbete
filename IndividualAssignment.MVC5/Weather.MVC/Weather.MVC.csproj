@@ -157,9 +157,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\IndexTEMP.cshtml" />
-    <Content Include="Views\Home\IndexTEMPDetails.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Location_DPView.cshtml" />
+    <Content Include="Views\Home\Forecast.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
