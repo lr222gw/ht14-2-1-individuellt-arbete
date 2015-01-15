@@ -28,5 +28,11 @@ namespace Weather.Domain
         public virtual DbSet<Forecast> Forecast { get; set; }
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<prevSearchCache> prevSearchCache { get; set; }
+
+        protected override System.Data.Entity.Validation.DbEntityValidationResult ValidateEntity(DbEntityEntry entityEntry, System.Collections.Generic.IDictionary<object, object> items)
+        {
+            return base.ValidateEntity(entityEntry, items);
+        }
+
     }
 }

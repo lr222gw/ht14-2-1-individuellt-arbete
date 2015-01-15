@@ -23,8 +23,8 @@ namespace Weather.Domain.Repositories
                                         in _context.Location
                                         where GeoLocationID.GeoLocationID == item.GeoLocationID
                                         select GeoLocationID;
-                    
-                    if (alreadyExists.ToArray().Length <= 1)
+
+                    if (alreadyExists.Count() <= 1) // .ToArray().Length 
                     {
                         _context.Location.Add(item);
                     }
@@ -93,7 +93,7 @@ namespace Weather.Domain.Repositories
             }
             catch (Exception e)
             {
-                var he = e;
+                throw new Exception("Gick ej att spara");
             }
             
             

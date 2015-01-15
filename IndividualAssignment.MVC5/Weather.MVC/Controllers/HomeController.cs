@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Weather.Domain;
 using Weather.Domain.Repositories;
 using Weather.Domain.Webservices;
+using Weather.MVC.viewModels;
 
 namespace Weather.MVC.Controllers
 {
@@ -22,12 +23,24 @@ namespace Weather.MVC.Controllers
 
         [HttpPost]
         [ActionName("Index")]
-        public ActionResult Index_Post(string searchvalue)
+        public ActionResult Index_Post([Bind(Include = "search")] ViewModel viewModel)
         {
-
-            var h = service.search(searchvalue);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    viewModel.Locations = service.search(viewModel.search);
+                    return View(viewModel);
+                }
+            }
+            catch(Exception e)
+            {
+                ModelState.AddModelError(String.Empty, e);
+            }
             
-            return View(h);
+            
+            
+            return View();
         }
 
         public ActionResult Forecast(string geonameID)

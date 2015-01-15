@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Weather.Domain.Location>
+﻿@model  Weather.MVC.viewModels.ViewModel
 
 @{
     ViewBag.Title = "Sök område";
@@ -8,7 +8,8 @@
 
 @using (Html.BeginForm())
 {
-    <input type="search" name="searchvalue">
+    @Html.EditorFor(model => model.search)
+    @Html.ValidationMessageFor(model => model.search)
     <input type="submit" value="Sök">
 }
 

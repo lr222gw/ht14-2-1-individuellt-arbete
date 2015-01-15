@@ -86,3 +86,42 @@ font-size: 2em;
 margin: 0 auto;
 display: block;
 }
+
+div#errorpage {
+display: block;
+width: 20%;
+background-color: rgb(246, 123, 123);
+margin: 0 auto;
+padding: 10px;
+text-align: center;
+border-radius: 5px;
+font: status-bar;
+}
+
+div#errorpage h1 {
+text-decoration: underline;
+}
+#errorContent a {
+display: block;
+text-align: center;
+padding: 10px;
+font-family: sans-serif;
+color: rgb(74, 74, 209);
+font-size: medium;
+}
+p#larvigt {
+display: none;
+}
+p#larvigt:hover {
+display: normal;
+}
+p#larvigt:hover {
+display: list-item;
+}
+p#larvigt:hover {
+display: list-item;
+font-size: 12px;
+text-decoration: none;
+color: rgb(0, 128, 0);
+font-style: oblique;
+}

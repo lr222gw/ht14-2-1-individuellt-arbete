@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Weather.Domain.Location>
+﻿@model Weather.MVC.viewModels.ViewModel
 
-@foreach (var item in Model)
+@foreach (var item in Model.Locations)
 {
     <div class="locationItem">
         <h3>@Html.ActionLink(item.Name, "Forecast", new { geonameID = item.GeoLocationID })</h3>
